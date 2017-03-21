@@ -59,3 +59,44 @@ hr {
 .card {
   border: none;
 }
+
+.fallingLeaves {
+    position: relative;
+    z-index: 51;
+}
+.fallingLeaves img {
+    display: inline-block;
+	   margin: -300px 40px 54px -34px;
+     z-index: 51;
+    -webkit-animation: fallingLeaves 10s infinite  linear;
+    -moz-animation: fallingLeaves 10s infinite  linear;
+}
+
+@-webkit-keyframes fallingLeaves {
+  0% {
+    opacity: 1;
+	-webkit-transform: translate(0, 0px) rotateZ(0deg);
+  }
+  50% {
+    opacity: 1;
+	-webkit-transform: translate(50px, 600px) rotateZ(180deg);
+  }
+  100% {
+    opacity: 0;
+	-webkit-transform: translate(100px, 1200px) rotateZ(360deg);
+  }
+}
+@-moz-keyframes fallingLeaves {
+  0% {
+    opacity: 1;
+	-webkit-transform: translate(0, 0px) rotateZ(0deg);
+  }
+  50% {
+    opacity: 1;
+	-webkit-transform: translate(50px, 600px) rotateZ(180deg);
+  }
+  100% {
+    opacity: 0;
+	-webkit-transform: translate(100px, 1200px) rotateZ(360deg);
+  }
+}
