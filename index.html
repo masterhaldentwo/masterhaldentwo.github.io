@@ -92,24 +92,23 @@
               var audio = '<source src="detroit.mp3" type="audio/mpeg">';
               var jersey = '<span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span>';
               var pucks = '<img src="./img/all-the-pucks.png" class="img-fluid">';
-              var button = '<div class="col-md-12 text-center"><button class="btn btn-danger btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample">BLASH TOLD HIM TO SCORE AND HE DID IT THE MADLAD!</button></div>';
-              if(goals == 0) {
-                document.getElementById('no').innerHTML=no;
-              } else {
+              var button = '<div class="col-md-12 text-center"><button class="btn btn-danger btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample">BLASH DARED HIM NOT TO SCORE FOR A YEAR AND HE DID IT THE MADLAD!</button></div>';
+
                 document.getElementById('yes').innerHTML=yes;
                 document.body.style.background = "url('./img/drinky.png') no-repeat center top fixed";
                 document.body.style.backgroundSize ="cover";
                 document.getElementById('audio').innerHTML=audio;
-                //document.getElementById('leaves').innerHTML=jersey;
                 document.getElementById('collapseExample').innerHTML=pucks;
                 document.getElementById('button').innerHTML=button;
-              }
+                document.getElementById('leaves').innerHTML=jersey;
+
 
               //Display No/Yes for scored and NHL records
 
 
               document.getElementById('shots-record').innerHTML=shots;
               document.getElementById('time-on-ice-record').innerHTML=toi;
+
 
         });
 
