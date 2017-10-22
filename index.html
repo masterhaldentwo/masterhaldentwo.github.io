@@ -11,37 +11,14 @@
       <link rel="shortcut icon" type="image/png" href="./img/favicon.png"/>
       <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
       <!-- Bootstrap core CSS -->
-      <link href="./css/bootstrap.min.css" rel="stylesheet">
-      <link href="./icons/css/fontello.css" rel="stylesheet">
-
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
       <!-- Custom styles for this template -->
-      <link href="./css/grid.css" rel="stylesheet">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+      <link href="./css/new.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
       <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-93901490-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-      <script src="./js/bootstrap.min.js"></script>
-      <script>
-
-          //Games played stats
-          var standingsUrl = "https://statsapi.web.nhl.com/api/v1/standings";
-          $.getJSON(standingsUrl, function(data) {
-            wings = data.records[1].teamRecords[7];
-            wingsGames = wings.gamesPlayed;
-            totalGames = 82;
-
-            gamesLeft = totalGames - wingsGames;
-            document.getElementById('jersey').innerHTML=gamesLeft;
-
-          });
 
           //Sheahan stats
           var url = "https://statsapi.web.nhl.com/api/v1/people/8475772?expand=person.stats&stats=yearByYear&expand=stats.team&site=en_nhl";
@@ -49,158 +26,32 @@
           $.getJSON( url, function( data ) {
 
               //Base path for 2016/17 season
-              currentSeason = data.people[0].stats[0].splits[11].stat;
+              currentSeason = data.people[0].stats[0].splits[12].stat;
               goals = currentSeason.goals;
-              games = currentSeason.games;
-              shots = currentSeason.shots;
-
-              //Split the returned string and turn the value into an integer. Original format string(xx:yy) -> float(xx.yy)
-              toi = currentSeason.timeOnIce;
-              toiArray = toi.split(":");
-              toiInt = parseFloat(toiArray.join("."));
-              pp = currentSeason.powerPlayTimeOnIce;
-              ppArray = pp.split(":");
-              ppInt = parseFloat(ppArray.join("."));
-
-              //Per game values for TOI, PP TOI and Shots
-              toiGame = (toiInt/games).toFixed(1);
-              ppGame = (ppInt/games).toFixed(1);
-              shotsGame = (shots/games).toFixed(2);
-
-              recordTOI = 910;
-
-              //Build the stats table
-              stats = "<tr>";
-              $(data.people[0].stats[0].splits[11].stat).each(function() {
-                stats+="<td>"+this.games+"</td>";
-                stats+="<td>"+this.goals+"</td>";
-                stats+="<td>"+this.assists+"</td>";
-                stats+="<td>"+this.shots+"</td>";
-                stats+="<td>"+shotsGame+"</td>";
-                stats+="<td>"+this.plusMinus+"</td>";
-                stats+="<td>"+this.timeOnIce+"</td>";
-                stats+="<td>"+toiGame+"</td>";
-                stats+="<td>"+this.powerPlayTimeOnIce+"</td>";
-                stats+="<td>"+ppGame+"</td>";
-              });
-              stats+="</tr>";
-              document.getElementById("table").innerHTML=stats;
+              console.log(currentSeason);
 
               //Check if Sheahan has scored
-              var no = "No";
-              var yes = "Yes!";
-              var audio = '<source src="detroit.mp3" type="audio/mpeg">';
-              var jersey = '<span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span><span><img src="./img/jersey.png"></span>';
-              var pucks = '<img src="./img/all-the-pucks.png" class="img-fluid">';
-              var button = '<div class="col-md-12 text-center"><button class="btn btn-danger btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample">BLASH DARED HIM NOT TO SCORE FOR A YEAR AND HE DID IT THE MADLAD!</button></div>';
-
-                document.getElementById('yes').innerHTML=yes;
-                document.body.style.background = "url('./img/drinky.png') no-repeat center top fixed";
-                document.body.style.backgroundSize ="cover";
-                document.getElementById('audio').innerHTML=audio;
-                document.getElementById('collapseExample').innerHTML=pucks;
-                document.getElementById('button').innerHTML=button;
-                document.getElementById('leaves').innerHTML=jersey;
-
-
-              //Display No/Yes for scored and NHL records
-
-
-              document.getElementById('shots-record').innerHTML=shots;
-              document.getElementById('time-on-ice-record').innerHTML=toi;
-
-
+              var hasScored;
+              if(goals > 0) {
+                hasScored = "Yes!";
+              } else {
+                hasScored = "No";
+              }
+              document.getElementById('has-scored').innerHTML=hasScored;
         });
-
-
 
       </script>
 
     </head>
     <body>
-      <audio id="audio"autoplay loop>
-      </audio>
-      <div class="fallingLeaves" id="leaves">
-    	</div>
-      <div class="gifs" id="gifs">
-      </div>
-
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-4 text-center">
-            <img src="./img/rocket.png" class="img-fluid" alt="Sheahan">
+            <img src="./img/rocket.png" class="img-fluid" alt="Sheahan"><hr>
+            <h1 id="has-scored"></h1>
           </div>
         </div>
-        <h1 id="no" class="text-center"></h1>
-        <h1 id="yes" class="text-center"></h1>
-
-        <hr>
-        <div class="row justify-content-center">
-          <div id="button">
-          <div class="col-sm-4 text-center">
-            <button class="btn btn-outline-info btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              Show me some stats!
-            </button>
-          </div>
-          </div>
-        </div>
-
-      <div class="collapse" id="collapseExample">
-        <div class="card card-block">
-
-        <h2>Riley Sheahan stats 2016/17</h2>
-        <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Games</th>
-              <th>Goals</th>
-              <th>Assists</th>
-              <th>Shots</th>
-              <th>Shots/Game</th>
-              <th>Plus/Minus</th>
-              <th>Time On Ice</th>
-              <th>TOI/Game</th>
-              <th>PP TOI</th>
-              <th>PP TOI/Game</th>
-            </tr>
-          </thead>
-          <tbody id="table">
-          </tbody>
-        </table>
-      </div>
-    <hr>
-
-        <h2>NHL Records <i class="icon-trophy"></i></h2>
-        <div class="row">
-          <div class="col-md-4">
-            <a target="_blank" href="http://www.hockey-reference.com/play-index/psl_finder.cgi?request=1&match=single&season_start=1&season_end=-1&rookie=N&age_min=0&age_max=99&pos=F&is_playoffs=N&c1stat=goals&c1comp=lt&c1val=0&threshhold=5&order_by=shots">
-              <p class="text-left">Most shots to start a season for a forward without scoring <h2><span class="badge badge-success" id="shots-record"></span></h2></p>
-            </a>
-          </div>
-          <div class="col-md-4 offset-md-1">
-            <a target="_blank" href="http://www.hockey-reference.com/play-index/psl_finder.cgi?request=1&match=single&season_start=1&season_end=-1&rookie=N&age_min=0&age_max=99&pos=F&is_playoffs=N&c1stat=goals&c1comp=lt&c1val=0&threshhold=5&order_by=time_on_ice">
-              <p class="text-left">Most time on ice to start a season for a forward without scoring<h2><span class="badge badge-success" id="time-on-ice-record"></span></h2></p>
-            </a>
-          </div>
-          <div class="col-lg-2 offset-lg-1">
-            <a target="_blank" href="https://twitter.com/wingedwheelpod">
-              <p>Games until Winged Wheel Podcast buy a Sheahan Jersey?</p>
-              <h4><span class="badge badge-danger" id="jersey"></span><h4>
-            </a>
-          </div>
-        </div>
-
-  </div>
-</div>
 
       </div> <!-- /container -->
-
-      <!-- Bootstrap core JavaScript
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-      </div>
     </body>
   </html>
